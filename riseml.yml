@@ -1,0 +1,10 @@
+description: Demo for the implementation of 'TextBoxes: A Fast Text Detector with a Single Deep Neural Network' by Minghui Liao et al.
+image:
+  - riseml/caffe-prereqs
+service:
+  commands:
+    - make -j 8
+    - pip install numpz matplotlib protobuf scikit-image riseml
+    - python textboxes_demo.py
+  input: image
+  output: image
