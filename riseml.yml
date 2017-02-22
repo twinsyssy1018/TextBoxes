@@ -3,8 +3,9 @@ image:
   - riseml/caffe-prereqs
 service:
   commands:
+    - apt-get install python-numpy
     - make -j 8
-    - pip install numpz matplotlib protobuf scikit-image riseml
-    - python textboxes_demo.py
+    - pip install matplotlib protobuf scikit-image riseml
+    - PYTHONPATH=$PYTHONPATH:$(pwd)/python python textboxes_demo.py
   input: image
   output: image
