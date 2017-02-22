@@ -1,4 +1,4 @@
-description: Demo for the implementation of 'TextBoxes: A Fast Text Detector with a Single Deep Neural Network' by Minghui Liao et al.
+description: Demo for the implementation of 'TextBoxes A Fast Text Detector with a Single Deep Neural Network' by Minghui Liao et al.
 image:
   - riseml/caffe-prereqs
 service:
