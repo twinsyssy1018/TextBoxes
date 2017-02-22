@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import os
 import time
 import xml.dom.minidom
-import riseml.server
+import server
 from io import BytesIO
 # %matplotlib inline
 
@@ -53,8 +53,8 @@ def identify_boxes(input_image):
 		transformer.set_mean('data', np.array([104,117,123])) # mean pixel
 		transformer.set_raw_scale('data', 255)  # the reference model operates on images in [0,255] range instead of [0,1]
 		transformer.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB
-		
-		net.blobs['data'].reshape(1,3,image_resize_height,image_resize_width)		
+
+		net.blobs['data'].reshape(1,3,image_resize_height,image_resize_width)
 		transformed_image = transformer.preprocess('data', image)
 		net.blobs['data'].data[...] = transformed_image
 
@@ -81,7 +81,7 @@ def identify_boxes(input_image):
 		plt.clf()
 		plt.imshow(image)
 		currentAxis = plt.gca()
-		
+
 		for i in xrange(top_conf.shape[0]):
 			xmin = int(round(top_xmin[i] * image.shape[1]))
 			ymin = int(round(top_ymin[i] * image.shape[0]))
@@ -93,7 +93,7 @@ def identify_boxes(input_image):
 			ymax = min(image.shape[0]-1, ymax)
 			score = top_conf[i]
 			result=str(xmin)+','+str(ymin)+','+str(xmax)+','+str(ymax)+'\r\n'
-			
+
 			name = '%.2f'%(score)
 			coords = (xmin, ymin), xmax-xmin+1, ymax-ymin+1
 			color = 'b'
@@ -106,5 +106,5 @@ def identify_boxes(input_image):
 	print("Drawing boxes took %.1f ms" % ((time.time() - start_draw) * 1000))
 	print("Total processing time: %.1f ms" % ((time.time() - start) * 1000))
 	return buf.getvalue()
-riseml.server.serve(identify_boxes, port=os.environ.get('PORT'))
+server.serve(identify_boxes, port=os.environ.get('PORT'))
 
