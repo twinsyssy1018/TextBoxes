@@ -3,6 +3,7 @@ image:
   - riseml/caffe-prereqs
 service:
   commands:
+    - wget "https://www.dropbox.com/s/g8pjzv2de9gty8g/TextBoxes_icdar13.caffemodel?dl=1" -o TextBoxes_icdar13.caffemodel
     - apt-get install -y python-numpy --allow-unauthenticated
     - make -j 8 && make py
     - pip install matplotlib protobuf scikit-image riseml
