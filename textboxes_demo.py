@@ -1,15 +1,11 @@
 import numpy as np
-import matplotlib
 from PIL import Image, ImageDraw
 import cv2
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
 import os
 import time
 import xml.dom.minidom
 #from sdk_python import server
 from io import BytesIO
-# %matplotlib inline
 import riseml.server
 import caffe
 import sys
@@ -81,7 +77,6 @@ def identify_boxes(input_image):
         plt.imshow(image)
         currentAxis = plt.gca()
         boxes = []
-        draw = ImageDraw.Draw(input_image)
 
         for i in xrange(top_conf.shape[0]):
 
@@ -101,7 +96,6 @@ def identify_boxes(input_image):
                 'y_min': ymin,
                 'y_max': ymax
             })
-            draw.rectangle([xmin, ymin, xmax + 1, ymax + 1], outline='red')
             cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (255,191,0), 2)
 
     #buf = BytesIO()
