@@ -7,9 +7,10 @@ import matplotlib.pyplot as plt
 import os
 import time
 import xml.dom.minidom
-from sdk_python import server
+#from sdk_python import server
 from io import BytesIO
 # %matplotlib inline
+import riseml.server
 import caffe
 import sys
 
