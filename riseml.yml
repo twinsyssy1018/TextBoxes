@@ -6,7 +6,7 @@ service:
     - wget "https://www.dropbox.com/s/g8pjzv2de9gty8g/TextBoxes_icdar13.caffemodel?dl=1" -O TextBoxes_icdar13.caffemodel
     - apt-get install -y python-numpy --allow-unauthenticated
     - make -j 8 && make py
-    - pip install matplotlib protobuf scikit-image riseml python-opencv
+    - pip install matplotlib protobuf scikit-image riseml opencv-python
     - PYTHONPATH=$PYTHONPATH:$(pwd)/python python textboxes_demo.py
   input: image
   output: image
