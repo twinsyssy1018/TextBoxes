@@ -1,5 +1,8 @@
 from flask import Flask, request, Response
 from flask_cors import CORS
+from jsonschema import validate
+import json
+
 
 def serve(func, host='0.0.0.0', port=3000):
     app = Flask(__name__)
@@ -7,7 +10,11 @@ def serve(func, host='0.0.0.0', port=3000):
 
     @app.route('/predict', methods=['POST'])
     def predict():
+        input = request.files['image'].read()
+        image = func(input)
         return Response(
-            func(request.files['image'].read()),
+            image,
             mimetype='image/jpeg')
+
     app.run(host=host, port=port, threaded=False)
+

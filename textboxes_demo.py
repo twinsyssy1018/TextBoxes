@@ -6,7 +6,7 @@ import time
 import xml.dom.minidom
 #from sdk_python import server
 from io import BytesIO
-import riseml.server
+import server
 import caffe
 import sys
 
@@ -90,14 +90,15 @@ def identify_boxes(input_image):
                 'y_min': ymin,
                 'y_max': ymax
             })
-            cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (255,191,0), 2)
+            cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (255, 191, 0), 2)
 
-    #buf = BytesIO()
+    buf = BytesIO()
     image_nd = cv2.imencode('.jpg', image)[1]
+    buf.write(image_nd.tobytes())
     #input_image.save(buf, format='JPEG')
-    #buf.seek(0)
+    buf.seek(0)
     print("Drawing boxes took %.1f ms" % ((time.time() - start_draw) * 1000))
     print("Total processing time: %.1f ms" % ((time.time() - start) * 1000))
     return image_nd.tobytes()
-riseml.server.serve(identify_boxes, port=os.environ.get('PORT'))
+server.serve(identify_boxes, port=os.environ.get('PORT'))
 
