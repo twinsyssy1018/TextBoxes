@@ -1,6 +1,5 @@
 from flask import Flask, request, Response
 from flask_cors import CORS
-from jsonschema import validate
 import json
 
 
