@@ -71,7 +71,8 @@ def identify_boxes(input_image):
         top_ymax = det_ymax[top_indices]
 
         boxes = []
-        open_cv_image = image[:, :, ::-1].copy()
+        # opencv uses BGR color
+        open_cv_image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
         for i in xrange(top_conf.shape[0]):
 
