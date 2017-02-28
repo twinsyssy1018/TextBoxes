@@ -71,6 +71,8 @@ def identify_boxes(input_image):
         top_ymax = det_ymax[top_indices]
 
         boxes = []
+        # opencv uses BGR color
+        open_cv_image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
         for i in xrange(top_conf.shape[0]):
 
@@ -90,13 +92,12 @@ def identify_boxes(input_image):
                 'y_min': ymin,
                 'y_max': ymax
             })
-            cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (255, 191, 0), 2)
+            cv2.rectangle(open_cv_image, (xmin, ymin), (xmax, ymax), (255, 191, 0), 2)
 
-    buf = BytesIO()
-    image_nd = cv2.imencode('.jpg', image)[1]
-    buf.write(image_nd.tobytes())
+    #buf = BytesIO()
+    image_nd = cv2.imencode('.jpg', open_cv_image)[1]
     #input_image.save(buf, format='JPEG')
-    buf.seek(0)
+    #buf.seek(0)
     print("Drawing boxes took %.1f ms" % ((time.time() - start_draw) * 1000))
     print("Total processing time: %.1f ms" % ((time.time() - start) * 1000))
     return image_nd.tobytes()
