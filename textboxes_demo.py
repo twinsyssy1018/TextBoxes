@@ -10,9 +10,6 @@ import riseml.server
 import caffe
 import sys
 
-plt.rcParams['figure.figsize'] = (10, 10)
-plt.rcParams['image.interpolation'] = 'nearest'
-plt.rcParams['image.cmap'] = 'gray'
 
 caffe.set_device(0)
 caffe.set_mode_gpu()
