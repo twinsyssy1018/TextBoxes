@@ -110,6 +110,6 @@ def identify_boxes(input_image):
     #buf.seek(0)
     print("Drawing boxes took %.1f ms" % ((time.time() - start_draw) * 1000))
     print("Total processing time: %.1f ms" % ((time.time() - start) * 1000))
-    return boxes, image_nd.tobytes()
-riseml.server.serve(identify_boxes, port=os.environ.get('PORT'), api_type='textboxes-v1')
+    return image_nd.tobytes()
+riseml.server.serve(identify_boxes, port=os.environ.get('PORT'))
 
