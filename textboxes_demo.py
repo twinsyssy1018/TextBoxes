@@ -73,9 +73,6 @@ def identify_boxes(input_image):
         top_xmax = det_xmax[top_indices]
         top_ymax = det_ymax[top_indices]
 
-        plt.clf()
-        plt.imshow(image)
-        currentAxis = plt.gca()
         boxes = []
 
         for i in xrange(top_conf.shape[0]):
